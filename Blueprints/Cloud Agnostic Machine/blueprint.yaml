@@ -1,4 +1,6 @@
 formatVersion: 1
+name: Cloud Agnostic Machine
+version: 1
 inputs:
   image:
     type: string
