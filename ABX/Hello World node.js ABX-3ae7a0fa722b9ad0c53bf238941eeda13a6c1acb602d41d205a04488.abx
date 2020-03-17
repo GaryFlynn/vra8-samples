@@ -1,0 +1,16 @@
+---
+exportVersion: "1"
+exportId: "8a74802770e789af0170ea011156000c"
+name: "Hello World node.js ABX"
+runtime: "nodejs"
+entrypoint: "handler"
+inputs:
+  target: "World"
+timeoutSeconds: 180
+deploymentTimeoutSeconds: 600
+actionType: "SCRIPT"
+configuration:
+  const-providers:
+  - ""
+  const_azure-system_managed_identity: false
+memoryInMB: 150
