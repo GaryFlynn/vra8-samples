@@ -1,0 +1,37 @@
+formatVersion: 1
+name: Ubuntu 16.04 vSphere Machine
+version: 1
+inputs:
+  username:
+    type: string
+    title: Username
+    description: Username
+    default: testUser
+  password:
+    type: string
+    title: Password
+    default: VMware@123
+    encrypted: true
+    description: Password for the given username
+resources:
+  demo-machine:
+    type: Cloud.vSphere.Machine
+    properties:
+      flavor: small
+      imageRef: >-
+        https://cloud-images.ubuntu.com/releases/16.04/release-20170307/ubuntu-16.04-server-cloudimg-amd64.ova
+      cloudConfig: |
+        ssh_pwauth: yes
+        chpasswd:
+          list: |
+            ${input.username}:${input.password}
+          expire: false
+        users:
+          - default
+          - name: ${input.username}
+            lock_passwd: false
+            sudo: ['ALL=(ALL) NOPASSWD:ALL']
+            groups: [wheel, sudo, admin]
+            shell: '/bin/bash'
+        runcmd:
+          - echo "Defaults:${input.username}  !requiretty" >> /etc/sudoers.d/${input.username}
