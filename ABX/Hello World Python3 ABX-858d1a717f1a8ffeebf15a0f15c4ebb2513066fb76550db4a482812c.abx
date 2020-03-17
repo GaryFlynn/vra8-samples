@@ -5,7 +5,7 @@ name: "Hello World Python3 ABX"
 runtime: "python"
 entrypoint: "handler"
 inputs:
-  target: "World!"
+  target: "World"
 timeoutSeconds: 180
 deploymentTimeoutSeconds: 600
 actionType: "SCRIPT"
