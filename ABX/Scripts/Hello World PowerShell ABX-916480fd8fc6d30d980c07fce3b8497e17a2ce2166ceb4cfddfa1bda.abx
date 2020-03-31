@@ -1,0 +1,14 @@
+---
+exportVersion: "1"
+exportId: "8a5eb3417126ded00171310e06f56348"
+name: "Hello World PowerShell ABX"
+runtime: "powershell"
+entrypoint: "handler"
+inputs:
+  target: "World"
+timeoutSeconds: 180
+deploymentTimeoutSeconds: 600
+actionType: "SCRIPT"
+configuration:
+  const_azure-system_managed_identity: false
+memoryInMB: 300
