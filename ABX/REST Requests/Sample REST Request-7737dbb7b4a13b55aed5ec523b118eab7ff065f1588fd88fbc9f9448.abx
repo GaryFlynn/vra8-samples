@@ -1,0 +1,22 @@
+---
+exportVersion: "1"
+exportId: "8a7480e47115f8c20171311a3c5b003a"
+name: "Sample REST Request"
+runtime: "python"
+entrypoint: "handler"
+inputs:
+  url: "https://postman-echo.com/get"
+  method: "GET"
+outputNames:
+- "statusCode"
+- "status"
+- "responseBody"
+- "responseHeaders"
+timeoutSeconds: 180
+dependencies: "requests"
+actionType: "REST_CALL"
+configuration:
+  const-providers:
+  - ""
+  const_azure-system_managed_identity: false
+memoryInMB: 128
