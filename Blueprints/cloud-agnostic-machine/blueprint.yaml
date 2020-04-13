@@ -1,5 +1,5 @@
 name: Cloud Agnostic Single Machine
-version: 0.0.2
+version: 0.0.3
 formatVersion: 1
 inputs: 
   cloud:
