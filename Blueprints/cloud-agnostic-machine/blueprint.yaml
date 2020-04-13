@@ -19,8 +19,8 @@ inputs:
     enum:
       - Windows Server 2016
       - Windows Server 2012 R2
-      - RHEL 7
-      - RHEL 8
+      - RedHat Linux 7.7
+      - RedHat Linux 8.1
   size:
     type: string
     title: Size
