@@ -2,7 +2,6 @@
 
 import requests
 
-
 def handler(ctx, inputs):
     url = inputs["url"]
     method = "GET"
