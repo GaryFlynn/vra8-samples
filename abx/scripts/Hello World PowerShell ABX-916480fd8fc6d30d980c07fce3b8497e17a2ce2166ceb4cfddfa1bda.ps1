@@ -1,5 +1,5 @@
 function handler($context, $payload) {
-  Write-Host "Hello " $payload.target
+  Write-Host "Hello" $payload.target
 
   return $payload
 }
