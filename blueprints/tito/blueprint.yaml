@@ -32,7 +32,7 @@
 # POSSIBILITY OF SUCH DAMAGE.
 #
 formatVersion: 1
-name: bp-tito-cloudagnostic
+name: Cloud Agnostic TITO
 version: 1.7
 inputs:
   application:
