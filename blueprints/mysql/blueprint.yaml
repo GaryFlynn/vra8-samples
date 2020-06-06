@@ -28,7 +28,7 @@ resources:
       script: echo "do nothing"
       vcfqdn: vcenter-1.homelab.local
       machinename: '${resource.MySQL_Server.resourceName}'
-      template_locker_creds: Windows Template
+      template_locker_creds: RHEL Template
       vc_cred_name: vcenter-1.homelab.local
   Install_MySQL:
     type: Custom.SoftwareScript
@@ -63,7 +63,7 @@ resources:
         sudo mysql --defaults-extra-file=~/mysql.cnf -e 'flush privileges'
       vcfqdn: vcenter-1.homelab.local
       machinename: '${resource.MySQL_Server.resourceName}'
-      template_locker_creds: Windows Template
+      template_locker_creds: RHEL Template
       vc_cred_name: vcenter-1.homelab.local
   MySQL_Server:
     type: Cloud.vSphere.Machine
@@ -71,19 +71,19 @@ resources:
       image: RedHat Linux 8.1
       flavor: x-small
       newName: '${input.MachineName}'
-      cloudConfig: |
-        users:
-          - name: ${input.username}
-            sudo: ['ALL=(ALL) NOPASSWD:ALL']
-            groups: sudo
-            shell: /bin/bash
+      #cloudConfig: |
+      #  users:
+      #    - name: ${input.username}
+      #      sudo: ['ALL=(ALL) NOPASSWD:ALL']
+      #      groups: sudo
+      #      shell: /bin/bash
 
-        runcmd:
-          - USER=${input.username}
-          - PASS=${input.password}
-          - echo $USER:$PASS | /usr/sbin/chpasswd
-          - echo ${input.username}:$PASS | /usr/sbin/chpasswd
-          - sed -i "s/PasswordAuthentication no/PasswordAuthentication yes/g" /etc/ssh/sshd_config
-          - service ssh reload
+      #  runcmd:
+      #    - USER=${input.username}
+      #    - PASS=${input.password}
+      #    - echo $USER:$PASS | /usr/sbin/chpasswd
+      #    - echo ${input.username}:$PASS | /usr/sbin/chpasswd
+      #    - sed -i "s/PasswordAuthentication no/PasswordAuthentication yes/g" /etc/ssh/sshd_config
+      #    - service ssh reload
       constraints: null
 # - tag: 'env:vsphere'
