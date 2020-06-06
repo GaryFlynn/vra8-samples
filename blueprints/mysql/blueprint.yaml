@@ -79,7 +79,6 @@ resources:
       #      sudo: ['ALL=(ALL) NOPASSWD:ALL']
       #      groups: sudo
       #      shell: /bin/bash
-
       #  runcmd:
       #    - USER=${input.username}
       #    - PASS=${input.password}
@@ -88,7 +87,7 @@ resources:
       #    - sed -i "s/PasswordAuthentication no/PasswordAuthentication yes/g" /etc/ssh/sshd_config
       #    - service ssh reload
       constraints: null
-# - tag: 'env:vsphere'
+  # - tag: 'env:vsphere'
   Cloud_vSphere_Network_1:
     type: Cloud.vSphere.Network
     properties:
