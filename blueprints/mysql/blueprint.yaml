@@ -1,6 +1,6 @@
 formatVersion: 1
 name: MySQL
-version: 1.0
+version: 1.1
 inputs:
   username:
     type: string
@@ -71,6 +71,8 @@ resources:
       image: RedHat Linux 8.1
       flavor: x-small
       newName: '${input.MachineName}'
+      networks:
+        - network: '${resource.Cloud_vSphere_Network_1.id}'
       #cloudConfig: |
       #  users:
       #    - name: ${input.username}
@@ -87,3 +89,11 @@ resources:
       #    - service ssh reload
       constraints: null
 # - tag: 'env:vsphere'
+  Cloud_vSphere_Network_1:
+    type: Cloud.vSphere.Network
+    properties:
+      networkType: existing
+      constraints: []
+      tags:
+        - key: cloud
+          value: vsphere
