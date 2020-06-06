@@ -33,7 +33,7 @@
 #
 formatVersion: 1
 name: Cloud Agnostic TITO
-version: 1.7
+version: 1.7.1
 inputs:
   application:
     type: string
