@@ -1,6 +1,6 @@
 formatVersion: 1
 name: MySQL
-version: 1.0
+version: 1.1
 inputs:
   username:
     type: string
