@@ -97,8 +97,8 @@ resources:
       #  - key: environment
       #    value: '${input.environment}'
       resourceGroupName: '${input.cloud_target == "target:azure" ? "operationsaas" : ""}'
-      image: im-ubuntu16046
-      flavor: fl-small
+      image: ubuntu16
+      flavor: small
       remoteAccess:
         username: ubuntu
         authentication: publicPrivateKey
@@ -168,7 +168,7 @@ resources:
     type: Cloud.Machine
     properties:
       image: im-ubuntu16046
-      flavor: fl-small
+      flavor: small
       tags:
         - key: application
           value: '${input.application}'
