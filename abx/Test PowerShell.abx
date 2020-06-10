@@ -1,0 +1,12 @@
+---
+exportVersion: "1"
+exportId: "8a748010725d30c201726053627d0010"
+name: "Test PowerShell"
+runtime: "powershell"
+entrypoint: "handler"
+inputs:
+  target: "World"
+timeoutSeconds: 180
+deploymentTimeoutSeconds: 600
+actionType: "SCRIPT"
+memoryInMB: 300
