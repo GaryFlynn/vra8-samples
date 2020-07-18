@@ -1,5 +1,5 @@
 ---
-exportVersion: "1.1"
+exportVersion: "1"
 exportId: "8a7480e47115f8c20171311a3c5b003a"
 name: "Sample REST Request"
 runtime: "python"
