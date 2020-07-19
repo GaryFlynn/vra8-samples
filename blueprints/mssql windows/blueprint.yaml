@@ -1,0 +1,62 @@
+formatVersion: 1
+inputs:
+  MachineName:
+    type: string
+    title: Name for the VM
+    description: Enter Name for VM.
+  isopath:
+    type: string
+  dirpath:
+    type: string
+  ps1path:
+    type: string
+resources:
+  Cloud_vSphere_Machine_1:
+    type: Cloud.vSphere.Machine
+    properties:
+      image: Windows Server 2016
+      flavor: small
+      customizationSpec: Windows (homelab.local)
+      newName: '${input.MachineName}'
+      networks:
+        - network: '${resource.Cloud_vSphere_Network_1.id}'
+      constraints:
+        - tag: 'cloud:vsphere'
+      tags:
+        - key: app
+          value: sql
+  MSSQL_Install:
+    type: Custom.remotescript
+    dependsOn:
+      - Cloud_vSphere_Machine_1
+    properties:
+      vcfqdn: vcenter-1.homelab.local
+      vc_cred_name: vcenter-1.homelab.local
+      lcmfqdn: vrslcm8.homelab.local
+      template_locker_creds: Windows Template
+      machinename: '${resource.Cloud_vSphere_Machine_1.resourceName}'
+      script: |
+        Install-WindowsFeature -name Web-Server -IncludeManagementTools
+        New-Item $env:SystemDrive\powershell_multipart_1.txt -type file -ErrorAction SilentlyContinue
+        $ImagePath = '${input.isopath}'
+        $DIR = '${input.dirpath}'
+        New-Item -Path $DIR -ItemType Directory
+        Copy-Item -Path (Join-Path -Path (Get-PSDrive -Name ((Mount-DiskImage -ImagePath $ImagePath -PassThru) | Get-Volume).DriveLetter).Root -ChildPath '*') -Destination $DIR -Recurse
+        Dismount-DiskImage -ImagePath $ImagePath
+        [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+        Get-PackageProvider -Name NuGet -ForceBootstrap
+        Install-Module -Name SqlServerDsc -Force
+        Copy-Item '${input.ps1path}' -Destination "c:\"
+        cd c:\
+        ./sqlserverconfig.ps1
+        Start-DscConfiguration -Path C:\sqlserverconfig -Wait -Force -Verbose
+        Start-Sleep -s 180
+        Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
+        choco install sql-server-management-studio -yes
+      reboot: 1
+  Cloud_vSphere_Network_1:
+    type: Cloud.vSphere.Network
+    properties:
+      networkType: existing
+      constraints:
+        - tag: 'cloud:vsphere'
