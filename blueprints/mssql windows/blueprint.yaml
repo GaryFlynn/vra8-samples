@@ -1,4 +1,6 @@
 formatVersion: 1
+name: MSSQL Windows
+version: 1.0
 inputs:
   MachineName:
     type: string
@@ -26,7 +28,7 @@ resources:
         - key: app
           value: sql
   MSSQL_Install:
-    type: Custom.remotescript
+    type: Custom.SoftwareScript
     dependsOn:
       - Cloud_vSphere_Machine_1
     properties:
