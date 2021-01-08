@@ -55,6 +55,6 @@ resources:
     properties:
       name: '${input.sqlDatabaseName}'
       region: UK South
-      account: Azure Free Account
+      account: 'Azure Free Account'
       server_name: '${resource.Azure_SQL_Server.name}'
       resource_group_name: '${resource.Azure_ResourceGroup.resourceName}'
